@@ -23,6 +23,9 @@ class Createaccount extends Component{
         }).then((res)=>{
             console.log(res.data);
             window.location = '/';
+            if(res.data.code===200){
+                localStorage.setItem("user", JSON.stringify(res.data.username));
+            }
         })
     }
     handleEmailChange = e =>{

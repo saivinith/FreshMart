@@ -25,8 +25,8 @@ def signup():
     if(tbl_user.count({"email":email})==0):
         tbl_user.insert_one({"email":email,"username":username,"password":password,"mobile":mobile})
     else:
-        return jsonify({"error":"hope it works"}) 
-    return jsonify({"success":"hope it works"})
+        return jsonify({"error":"hope it works","code":500}) 
+    return jsonify({"success":"hope it works","code":200,"username":username})
 
 @app.route('/validate',methods=['POST'])
 def validate():

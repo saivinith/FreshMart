@@ -1,5 +1,4 @@
-
-
+import React,{Component} from 'react'
 import './App.css'
 import Header from './headers'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
@@ -7,8 +6,9 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Login from './components/login'
 import Home from './components/home'
 import Createaccount from './components/signup'
-function App() {
-  return (
+class App extends Component {
+  render(){
+    return (
       <Router>
         <div className="App">
           <Header/>
@@ -23,11 +23,12 @@ function App() {
             <Home/>
           </Route>
         </Switch>
-        
         </div>
       </Router>
     
   );
 }
 
+  }
+  
 export default App;

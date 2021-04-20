@@ -5,9 +5,9 @@ import axios from 'axios'
 class Login extends Component {
     state = {
         email:'', 
-        password:'',
-       
+        password:'',       
     }
+ 
     validate = e =>{
         e.preventDefault();
         axios.post('http://127.0.0.1:5000/validate',{          
@@ -15,7 +15,13 @@ class Login extends Component {
                 password:this.state.password,
         }).then((res)=>{
            if(res.data.code===200){
-            localStorage.setItem("user", JSON.stringify(res.data.username));   
+            localStorage.setItem("user", JSON.stringify(res.data.username));
+            if(res.data.username==="admin"){
+                localStorage.setItem("accesscode", 1);
+            }
+            else{
+                localStorage.setItem("accesscode", 0);
+            }   
             window.location = '/';
            }
            else{
