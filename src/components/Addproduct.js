@@ -11,7 +11,7 @@ class Addproduct extends Component{
         description:'',
         selectedFile:null
     }
-
+    
     save = e =>{
         e.preventDefault();
         console.log(this.state.selectedFile);
@@ -37,10 +37,19 @@ class Addproduct extends Component{
     };
     handleChange = e => this.setState({ [e.target.name]: e.target.value, error: "" });
     handleFile(e){
+      const types = ['image/png','image/jpeg','image/jpg'];
         console.log(e.target.files);
-        this.setState({
-            selectedFile:e.target.files[0]
-        })
+        let selected = e.target.files[0]
+        if(selected && types.includes(selected.type)){
+            this.setState({
+              selectedFile:e.target.files[0]
+          })
+        }else{
+          this.setState(
+            { flash: { status: 'is-danger', msg: 'Only Images are accepted' }}
+          );
+        }
+        
     }
     render() {
         return (

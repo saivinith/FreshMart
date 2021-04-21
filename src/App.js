@@ -21,7 +21,6 @@ class App extends Component {
             <Createaccount/>
           </Route>
           <Route path="/add">
-            
             <Addproduct/>
           </Route>
           <Route path="/">

@@ -54,7 +54,7 @@ def fetchProducts():
     for d in data:
         d.pop('_id')
         res.append(d)
-    print(res)
+    #print(res)
     return json.dumps(res)
 if __name__ == "__main__":
     app.run(debug=True)
