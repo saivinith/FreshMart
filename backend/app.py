@@ -12,7 +12,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 mongoClient = MongoClient('mongodb://127.0.0.1:27017')
 db = mongoClient.get_database('project')
 tbl_user = db.get_collection('users')
-
+tbl_prod = db.get_collection('products')
 @app.route('/signup',methods=['POST'])
 def signup():
     print("yes")
@@ -39,5 +39,22 @@ def validate():
         return jsonify({"code":200,"username":data[0]['username']})
     else:
         return jsonify({"code":500})
+@app.route('/product',methods=['POST'])
+def product():
+    products = request.get_data()
+    #print(products)
+    print((request.files['file']).filename)
+    tbl_prod.insert_one({"name":request.form['name'],"price":request.form['price'],"Quantity":request.form['stock'],"shortDesc":request.form['shortDesc'],"description":request.form['description'],"file":(request.files['file']).filename})
+    return jsonify({"code":200})
+
+@app.route('/fetchProducts',methods=['GET'])
+def fetchProducts():
+    data = tbl_prod.find()
+    res = []
+    for d in data:
+        d.pop('_id')
+        res.append(d)
+    print(res)
+    return json.dumps(res)
 if __name__ == "__main__":
     app.run(debug=True)

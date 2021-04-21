@@ -6,6 +6,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Login from './components/login'
 import Home from './components/home'
 import Createaccount from './components/signup'
+import Addproduct from './components/Addproduct'
 class App extends Component {
   render(){
     return (
@@ -19,9 +20,14 @@ class App extends Component {
           <Route path="/signup">
             <Createaccount/>
           </Route>
+          <Route path="/add">
+            
+            <Addproduct/>
+          </Route>
           <Route path="/">
             <Home/>
           </Route>
+
         </Switch>
         </div>
       </Router>

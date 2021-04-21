@@ -20,6 +20,7 @@ class Header extends Component{
         this.setState({ user: null });
         localStorage.removeItem("user");
         localStorage.removeItem("accesscode");
+        window.location = '/';
       };
     render(){
         return(
@@ -48,7 +49,7 @@ class Header extends Component{
                   </Link>
                 )}
                 {this.state.user && this.state.accesscode > 0 && (
-                    <Link to="/" className="header_link">
+                    <Link to="/add" className="header_link">
                         <div className="header_option">
                             {/* <span className="header_optionLineOne">Hello</span> */}
                             <span className="header_optionLineTwo">Add Product</span>
