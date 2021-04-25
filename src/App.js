@@ -7,10 +7,13 @@ import Login from './components/login'
 import Home from './components/home'
 import Createaccount from './components/signup'
 import Addproduct from './components/Addproduct'
+import Favorite from './components/Favorite'
+import history from './history';
+import History from './components/History'
 class App extends Component {
   render(){
     return (
-      <Router>
+      <Router history={history}>
         <div className="App">
           <Header/>
         <Switch>
@@ -22,6 +25,12 @@ class App extends Component {
           </Route>
           <Route path="/add">
             <Addproduct/>
+          </Route>
+          <Route path="/cart">
+            <Favorite/>
+          </Route>
+          <Route path="/history">
+            <History/>
           </Route>
           <Route path="/">
             <Home/>

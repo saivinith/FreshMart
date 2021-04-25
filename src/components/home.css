@@ -1,0 +1,22 @@
+.home{
+    max-width: 1500px;
+    margin-left: 30px;
+    margin-right: auto;
+    margin-top: 15px;
+} 
+.home_row{
+   
+    max-width: 100px;
+    display: flex;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+.grid{
+    padding-top: 10px;
+    padding-left: 20px;
+}
+
+.grid-element{
+    margin-top: 20px;
+}
+

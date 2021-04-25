@@ -1,9 +1,14 @@
 import axios from 'axios'
 import React, { Component } from 'react'
 import Productitem from './Productitem'
-//import Carousel from "react-elastic-carousel";
+import './home.css'
+//import {Container,Row,Col} from 'react-bootstrap'
+//import 'bootstrap/dist/css/bootstrap.min.css';
+import Grid from '@material-ui/core/Grid';
+
 class Home extends Component{
     state = {
+        id:'',
         name:'',
         price:'',
         stock:'',
@@ -11,13 +16,6 @@ class Home extends Component{
         description:'',
         selectedFile:null,
         prod : [],
-        // items: [
-        //     {id: 1, title: 'item #1'},
-        //     {id: 2, title: 'item #2'},
-        //     {id: 3, title: 'item #3'},
-        //     {id: 4, title: 'item #4'},
-        //     {id: 5, title: 'item #5'}
-        //   ]
     }
     componentDidMount() {
         this.getProducts();
@@ -27,7 +25,7 @@ class Home extends Component{
         .then((res)=>{
             const products = res.data
             this.setState({prod:products})
-            console.log(products)
+            //console.log(products)
         })
         .catch(()=>{
             console.log('error home')
@@ -36,31 +34,34 @@ class Home extends Component{
     
     displayProducts = (items) =>{
         if(!items.length) return null;
-        console.log('sdfsd');
+
         return items.map((key,index) => (
-                <div key={index}>
-                    <Productitem name={key.name} price = {key.price} stock = {key.Quantity} shortdesc = {key.shortDesc} Desc={key.description} file={key.file}/>
-                    {/* <h2>{key.name}</h2>
-                    <p>{key.price}</p>
-                    <p>{key.Quantity}</p> */}
-                </div>
-        
-        ));
+              
+            <div  key={index} className="grid-element">
+                    <Productitem id={key._id} name={key.name} price = {key.price} stock = {key.stock} shortdesc = {key.shortDesc} Desc={key.description} 
+                    file={key.file} category={key.category}/>
+
+            </div>
+            ))  
     };
 
     render(){
         //const { items } = this.state.items;
         return(
-            <>
-            {/* <Carousel>
-            {items.map(item => <div key={item.id}>{item.title}</div>)}
-            </Carousel> */}
-            <h1>Welcome HOME!!!</h1> 
-            <div className='Pitems'>
-                {/* alert('er'); */}
-                {this.displayProducts(this.state.prod)}
-            </div>
-            </>    
+            <div>
+                    <div className="content">
+                    <div className="main">
+                        <Grid container spacing ={3} className="grid">
+                            {this.displayProducts(this.state.prod)}
+                        </Grid>
+                    </div>
+                    <div className="sidebar">
+                        
+                    </div>
+                    </div>
+            </div>        
+ 
+
         )
     }
 }

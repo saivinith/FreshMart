@@ -15,13 +15,18 @@ class Login extends Component {
                 password:this.state.password,
         }).then((res)=>{
            if(res.data.code===200){
+            console.log(res);   
             localStorage.setItem("user", JSON.stringify(res.data.username));
+            localStorage.setItem("userId", JSON.stringify(res.data.userId));
+            localStorage.setItem("cartItems", (res.data.cartItems));
+            //console.log((res.data.cartItems)+1);
             if(res.data.username==="admin"){
                 localStorage.setItem("accesscode", 1);
             }
             else{
                 localStorage.setItem("accesscode", 0);
             }   
+            //console.log(localStorage.getItem('cartItems'));
             window.location = '/';
            }
            else{
