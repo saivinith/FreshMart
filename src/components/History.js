@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Productitem from './Productitem'
 import './home.css'
-import Grid from '@material-ui/core/Grid';
 export default class Purchases extends Component{
 
     state = {

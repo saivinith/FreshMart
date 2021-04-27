@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import TextField from '@material-ui/core/TextField';
 //import "bulma/css/bulma.css";
+import './Addproduct.css'
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import SaveIcon from '@material-ui/icons/Save';
 class Addproduct extends Component{
     state={
         id:'',
@@ -93,74 +98,87 @@ class Addproduct extends Component{
     this.setState({category:e.target.value})
         //console.log(category);
  }
+
+ 
     render() {
         return (
-            <>
-              <div className="hero is-primary ">
-                <div className="hero-body container">
-                  <h4 className="title">Add Product</h4>
-                </div>
-              </div>
-              <br />
-              <br />
+            <div className='centerBox'>
+                  <h2 className="title">Add Product</h2>
+              <br/>
               <form onSubmit={this.save}>
                 <div className="columns is-mobile is-centered">
                   <div className="column is-one-third">
-                    <div className="field">
-                      <label className="label">Product Name: </label>
-                      <input
-                        className="input"
+                      
+                      <TextField
+                        className="align-items"
                         type="text"
                         name="name"
                         value={this.state.name}
                         onChange={this.handleChange}
                         required
+                        label="product name"
+                        variant="outlined" 
                       />
-                    </div>
-                    <div className="field">
-                      <label className="label">Price: </label>
-                      <input
-                        className="input"
+                      <TextField
+                        className="align-items"
                         type="number"
                         name="price"
                         value={this.state.price}
                         onChange={this.handleChange}
                         required
+                        label="price"
+                        variant="outlined" 
                       />
-                    </div>
-                    <div className="field">
-                      <label className="label">Available in Stock: </label>
-                      <input
-                        className="input"
+                      <TextField
+                        className="align-items"
                         type="number"
                         name="stock"
                         value={this.state.stock}
                         onChange={this.handleChange}
+                        label="Quantity"
+                        variant="outlined" 
                       />
-                    </div>
-                    <div className="field">
-                      <label className="label">Short Description: </label>
-                      <input
-                        className="input"
+                      <TextField
+                        className="align-items"
                         type="text"
                         name="shortDesc"
                         value={this.state.shortDesc}
                         onChange={this.handleChange}
+                        label="short Description"
+                        variant="outlined" 
                       />
-                    </div>
-                    <div className="field">
-                      <label className="label">Description: </label>
-                      <textarea
-                        className="textarea"
-                        type="text"
-                        rows="2"
-                        style={{ resize: "none" }}
+                      <TextField
+                        className="align-items"
+                        id="outlined-multiline-static"
+                        label="Multiline"
+                        multiline
+                        rows={4}
                         name="description"
                         value={this.state.description}
                         onChange={this.handleChange}
+                        defaultValue="Default Value"
+                        variant="outlined"
                       />
-                    </div>
-                    <div className="field">
+
+      <TextField
+      className="align-items"
+          id="outlined-select-currency"
+          select
+          label="Select"
+          value={this.state.category}
+          onChange={(e)=>this.handleCategoryChange(e)}
+          variant="outlined"
+        >
+           <MenuItem key="0" >Select</MenuItem>
+                        <MenuItem  key="1" value="Dairy">Dairy</MenuItem>
+                        <MenuItem key="2" value="Vegetable">Vegetable</MenuItem>
+                        <MenuItem key="3" value="Fruits">Fruits</MenuItem>
+                        <MenuItem key="4" value="Choclates">Choclates</MenuItem>
+                        <MenuItem key="5" value="Groceries">Groceries</MenuItem>
+        </TextField>
+
+
+                    {/* <div className="field">
                     <label className="label">Category: </label>
                     <select name="category" value={this.state.category} onChange={(e)=>this.handleCategoryChange(e)}>
                         <option id="0" >Select</option>
@@ -170,8 +188,15 @@ class Addproduct extends Component{
                         <option id="4" >Choclates</option>
                         <option id="5" >Groceries</option>
                     </select>
-                    </div>
-                    <div className="field">
+                    </div> */}
+                    <TextField
+                    className="align-items"
+                      name="selectedFile"
+                      onChange={(e)=>this.handleFile(e)}
+                      type="file"
+                      variant="outlined"
+                    />
+                    {/* <div className="field">
                       <label className="label">Upload Image: </label>
                       <input
                         type="file"
@@ -180,25 +205,29 @@ class Addproduct extends Component{
                         //value={this.state.selectedFile}
                         onChange={(e)=>this.handleFile(e)}
                       />
-                    </div>
+                    </div> */}
                     {this.state.flash && (
                       <div className={`notification ${this.state.flash.status}`}>
                         {this.state.flash.msg}
                       </div>
                     )}
-                    <div className="field is-clearfix">
-                      <button
-                        className="button is-primary is-outlined is-pulled-right"
+
+                <Button
+                        variant="contained"
                         type="submit"
+                        color="primary"
+                        size="large"
+                        className="align-items"
+                        startIcon={<SaveIcon />}
                         onClick={this.save}
                       >
-                        Submit
-                      </button>
-                    </div>
+                        Save
+                      </Button>
+                    
                   </div>
                 </div>
               </form>
-            </>
+            </div>
           );
     }
 }

@@ -1,0 +1,13 @@
+.centerBox {
+  position: absolute;
+  border: 1px solid black;
+  background: rgb(250, 250, 250);
+  padding: 20px;
+  width: 50%;
+  top: 10%;
+  left: 20%;
+}
+.align-items {
+  width: 100%;
+  margin-bottom: 20px !important;
+}

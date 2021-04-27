@@ -4,14 +4,13 @@ import './headers.css'
 import logo from './grocery_img.jpg'
 import {Link} from 'react-router-dom'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
-import {toast} from 'react-toastify'
+
 import 'react-toastify/dist/ReactToastify.css'
 class Header extends Component{
     state = {
         user:'',
         accesscode:0,
-        cart:0,
-        searchInput:''
+        cart:0
     }
     componentDidMount() {
         var user = localStorage.getItem('user');
@@ -27,23 +26,17 @@ class Header extends Component{
         localStorage.removeItem("cartItems")
         window.location = '/';
       };
-    search = () =>{
-        toast.info(this.state.searchInput,{position:toast.POSITION.TOP_CENTER,autoClose:5000})
-        localStorage.setItem("searchInput",this.state.searchInput)
-
-    }
-    changeInput = (e) =>{
-            this.setState({searchInput:e.target.value})
-    }
+  
+    
     render(){
         return(
             <nav className="header">
                 <img className="header_logo" alt="logo" src={logo}/>
                 {/* <h1 className="header_title">Grocery</h1> */}
                 <div className="header_search">
-                    <input type="text" value={this.state.searchInput} onChange = {this.changeInput} name = "search"className="header_searchInput"/>
+                    <input type="text" value={this.props.searchInput} onChange = {this.props.changeInput} name = "search" className="header_searchInput"/>
                     {/* <button className="header_searchIcon">sdf</button> */}
-                    <SearchIcon className="header_searchIcon" onClick={this.search}/>
+                    <SearchIcon className="header_searchIcon" onClick={this.props.handleClick}/>
                 </div>
                 
                         

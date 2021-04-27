@@ -59,10 +59,10 @@ class Favorite extends Component{
             this.setState({prod:products})
             var stotal = 0;
             var numItems = 0;
-            products.map((key,index) => (
-               stotal+=(key.quantity*key.price),
+            products.forEach((key,index) => {
+               stotal += (key.quantity*key.price) 
                numItems+=(key.quantity)
-               ));
+                });
            this.setState({subtotal:stotal})
            this.setState({itemCount:numItems})
            //console.log(numItems)

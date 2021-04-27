@@ -10,12 +10,26 @@ import Addproduct from './components/Addproduct'
 import Favorite from './components/Favorite'
 import history from './history';
 import History from './components/History'
+
 class App extends Component {
+
+  state = {
+    searchInput:'',
+    tempInput:''
+}
+changeInput = (e) =>{
+  this.setState({tempInput:e.target.value})
+}
+handleClick = () =>{
+    this.setState({searchInput:this.state.tempInput})
+    localStorage.setItem("searchInput",this.state.searchInput)
+
+}
   render(){
     return (
       <Router history={history}>
         <div className="App">
-          <Header/>
+          <Header handleClick={this.handleClick.bind(this)} changeInput={this.changeInput.bind(this)}/>
         <Switch>
           <Route path="/login">
             <Login/>
@@ -33,7 +47,7 @@ class App extends Component {
             <History/>
           </Route>
           <Route path="/">
-            <Home/>
+            <Home searchInput={this.state.searchInput}/>
           </Route>
 
         </Switch>
