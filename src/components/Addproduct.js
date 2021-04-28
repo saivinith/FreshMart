@@ -160,68 +160,45 @@ class Addproduct extends Component{
                         variant="outlined"
                       />
 
-      <TextField
-      className="align-items"
-          id="outlined-select-currency"
-          select
-          label="Select"
-          value={this.state.category}
-          onChange={(e)=>this.handleCategoryChange(e)}
-          variant="outlined"
-        >
-           <MenuItem key="0" >Select</MenuItem>
-                        <MenuItem  key="1" value="Dairy">Dairy</MenuItem>
-                        <MenuItem key="2" value="Vegetable">Vegetable</MenuItem>
-                        <MenuItem key="3" value="Fruits">Fruits</MenuItem>
-                        <MenuItem key="4" value="Choclates">Choclates</MenuItem>
-                        <MenuItem key="5" value="Groceries">Groceries</MenuItem>
-        </TextField>
+                      <TextField
+                      className="align-items"
+                          id="outlined-select-currency"
+                          select
+                          label="Select"
+                          value={this.state.category}
+                          onChange={(e)=>this.handleCategoryChange(e)}
+                          variant="outlined"
+                        >
+                      <MenuItem key="0" >Select</MenuItem>
+                      <MenuItem  key="1" value="Dairy">Dairy</MenuItem>
+                      <MenuItem key="2" value="Vegetable">Vegetable</MenuItem>
+                      <MenuItem key="3" value="Fruits">Fruits</MenuItem>
+                      <MenuItem key="4" value="Choclates">Choclates</MenuItem>
+                      <MenuItem key="5" value="Groceries">Groceries</MenuItem>
 
-
-                    {/* <div className="field">
-                    <label className="label">Category: </label>
-                    <select name="category" value={this.state.category} onChange={(e)=>this.handleCategoryChange(e)}>
-                        <option id="0" >Select</option>
-                        <option id="1" >Dairy</option>
-                        <option id="2" >Vegetable</option>
-                        <option id="3" >Fruits</option>
-                        <option id="4" >Choclates</option>
-                        <option id="5" >Groceries</option>
-                    </select>
-                    </div> */}
-                    <TextField
-                    className="align-items"
-                      name="selectedFile"
-                      onChange={(e)=>this.handleFile(e)}
-                      type="file"
-                      variant="outlined"
-                    />
-                    {/* <div className="field">
-                      <label className="label">Upload Image: </label>
-                      <input
-                        type="file"
-                        style={{ resize: "none" }}
-                        name="selectedFile"
-                        //value={this.state.selectedFile}
-                        onChange={(e)=>this.handleFile(e)}
-                      />
-                    </div> */}
-                    {this.state.flash && (
-                      <div className={`notification ${this.state.flash.status}`}>
-                        {this.state.flash.msg}
-                      </div>
-                    )}
+                      </TextField>
+                                  <TextField
+                                  className="align-items"
+                                    name="selectedFile"
+                                    onChange={(e)=>this.handleFile(e)}
+                                    type="file"
+                                    variant="outlined"
+                                  />
+                                  {this.state.flash && (
+                                    <div className={`notification ${this.state.flash.status}`}>
+                                      {this.state.flash.msg}
+                                    </div>
+                                  )}
 
                 <Button
                         variant="contained"
                         type="submit"
-                        color="primary"
                         size="large"
-                        className="align-items"
+                        className={`align-items button_add`}
                         startIcon={<SaveIcon />}
                         onClick={this.save}
                       >
-                        Save
+                        ADD Product
                       </Button>
                     
                   </div>

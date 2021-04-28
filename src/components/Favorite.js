@@ -9,9 +9,12 @@ import CurrencyFormat from 'react-currency-format'
 import Modal from "react-modal";
 import Zoom from "react-reveal/Zoom";
 import Fade from "react-reveal/Fade";
-import {toast} from 'react-toastify'
+import Button from '@material-ui/core/Button';
 import 'react-toastify/dist/ReactToastify.css'
 import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import {toast} from 'react-toastify'
+import { BorderColorOutlined } from '@material-ui/icons';
 class Favorite extends Component{
     state = {
         name: "",
@@ -31,8 +34,11 @@ class Favorite extends Component{
         this.setState({ [e.target.name]: e.target.value });
       };
     createOrder = (e) => {
-        localStorage.setItem('cartItems',0)
+        
         console.log(this.state.prod);
+        console.log(this.state.name);
+        console.log(this.state.email);
+        console.log(this.state.address);
         axios.post('http://127.0.0.1:5000/history',{          
                 fav:this.state.prod,
                 userId:localStorage.getItem('userId')
@@ -40,7 +46,7 @@ class Favorite extends Component{
                 console.log(res.data.code);
                 if(res.data.code===200){
                     this.setState({receipt:true})
-                    setTimeout(5000);
+                       localStorage.setItem('cartItems',0)
                 }
 
                 if(res.data.code!==200){
@@ -48,6 +54,7 @@ class Favorite extends Component{
                 }
                
         })
+        this.setState({receipt:true})
     };  
     getProducts = () =>{
         //console.log(localStorage.getItem('userId'));
@@ -87,12 +94,16 @@ class Favorite extends Component{
           flexGrow: 1,
         },
         paper: {
+            palette:{secondary:  '#f0c14b'},
             padding: theme.spacing(2),
             margin: 'auto',
             maxWidth: 200,
             textAlign: 'center',
             color: theme.palette.text.secondary,
         },
+        Button:{
+            backgroundColor:'primary'||'#f0c14b'
+        }
       }));
       classes = this.useStyles;
 
@@ -171,62 +182,97 @@ class Favorite extends Component{
                                     <div>
                                         <Panel header="" bordered className="card">
                                             <Paper className={this.classes.paper}><h2>Total:</h2><CurrencyFormat value={this.state.subtotal} displayType={'text'} thousandSeparator={true} prefix={'$'} /></Paper>
-                                            <button
+                                        </Panel>
+                                        <Button
+                                                variant="contained"
+                                                type="submit"
+                                                size="large"
+                                                color="secondary"
+                                                className={`align-items button_cart ${this.classes.Button}`}
                                                 onClick={() => {
-                                                this.setState({ showCheckout: true });
-                                                }}
-                                                className="button primary"
+                                                    this.setState({ showCheckout: true });
+                                                    }}
+                                                    style={{
+                                                        backgroundColor: "#e9b533",
+                                                        
+                                                    }}    
                                             >
                                                 Proceed
-                                            </button>
-                                        </Panel>
+                                            </Button>
                                         {this.state.showCheckout && (
                                             <Fade right cascade>
-                                            <div className="cart">
-                                                <div><h3>Enter Details:</h3></div>
-                                                
-                                                <form onSubmit={this.createOrder}>
-                                                <ul className="form-container">
-                                                    <li>
-                                                    <label>Email</label>
-                                                    <input
-                                                        name="email"
-                                                        type="email"
-                                                        required
-                                                        onChange={this.handleInput}
-                                                    ></input>
-                                                    </li>
-                                                    <li>
-                                                    <label>Name</label>
-                                                    <input
-                                                        name="name"
-                                                        type="text"
-                                                        required
-                                                        onChange={this.handleInput}
-                                                    ></input>
-                                                    </li>
-                                                    <li>
-                                                    <label>Address</label>
-                                                    <input
-                                                        name="address"
-                                                        type="text"
-                                                        required
-                                                        onChange={this.handleInput}
-                                                    ></input>
-                                                    </li>
-                                                    <li>
-                                                    <button className="button primary" >
-                                                        Checkout
-                                                    </button>
-                                                    </li>
-                                                </ul>
-                                                </form>
-                                            </div>
-                                            </Fade>
-                                        )}
-                                    </div>
-                                )}  
-                            {/* </div>    */}
+                                                <div><h3>Enter your Details:</h3></div>
+                                            <div className="cart">                                                
+                                            <div className='AddressBox'>
+                                                    <br/>
+                                                    <form>
+                                                        <div className="columns is-mobile is-centered">
+                                                        <div className="column is-one-third">
+                                                            
+                                                            <TextField
+                                                                className="align-items"
+                                                                type="email"
+                                                                name="email"
+                                                                //value={this.state.shortDesc}
+                                                                onChange={this.handleInput}
+                                                                label="email"
+                                                                variant="outlined" 
+                                                            />
+                                                            <TextField
+                                                                className="align-items"
+                                                                type="name"
+                                                                name="name"
+                                                                //value={this.state.shortDesc}
+                                                                onChange={this.handleInput}
+                                                                label="name"
+                                                                variant="outlined" 
+                                                            />
+                                                            <TextField
+                                                                className="align-items"
+                                                                id="outlined-multiline-static"
+                                                                label="Multiline"
+                                                                multiline
+                                                                rows={4}
+                                                                name="address"
+                                                                //value={this.state.description}
+                                                                onChange={this.handleInput}
+                                                                defaultValue=""
+                                                                variant="outlined"
+                                                            />
+
+                                                                        {this.state.flash && (
+                                                                            <div className={`notification ${this.state.flash.status}`}>
+                                                                            {this.state.flash.msg}
+                                                                            </div>
+                                                                        )}
+
+                                                        <Button
+                                                                variant="contained"
+                                                                type="submit"
+                                                                size="large"
+                                                                color="secondary"
+                                                                className={`align-items button_add`}
+                                                                //startIcon={<SaveIcon />}onSubmit={this.createOrder}
+                                                                onClick={this.createOrder}
+                                                                style={{
+                                                                    backgroundColor: "#e9b533",
+                                                                    
+                                                                }}
+                                                            >
+                                                                Submit
+                                                            </Button>
+                                                            
+                                                        </div>
+                                                        </div>
+                                                    </form>
+                                                    </div>
+                                                                </div>
+                                                                </Fade>
+                                                            )}
+                                                            
+                                                        </div>
+                                                    )}  
+                                             
                     </div>
                     </div>
         

@@ -17,16 +17,24 @@ import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Modal from "react-modal";
 import Zoom from "react-reveal/Zoom";
+import { FlexboxGrid } from 'rsuite';
 
 const useStyles = makeStyles({
-
+  root: {
+    maxWidth: 250,
+  },
     media: {
       height: 200,
       width: 250
+    },
+    content:{
+      display:FlexboxGrid,
+      height: 150
     }
   });
 
 toast.configure()  
+
 function Productitem({id,name,price,stock,shortdesc,Desc,file,category}) {
   var card_detail = {
     id:id,
@@ -41,36 +49,34 @@ function Productitem({id,name,price,stock,shortdesc,Desc,file,category}) {
     const user = localStorage.getItem('user');
     const accesscode = localStorage.getItem('accesscode');
     const classes = useStyles();
-    const  [toggleHeart, setToggleHeart] = useState(false)
+    // const  [toggleHeart, setToggleHeart] = useState(false)
     const [openModal ,setOpenModal] = useState(false)
     const filePath = '/images/'+file;
 
     const addTOC = () =>{
+      if(!user)
+      window.location='/login'
       card_detail.userID = localStorage.getItem('userId');
       console.log(stock);
-      //console.log(parseInt(cid)+1)
-      setToggleHeart(!toggleHeart)
-      if(!toggleHeart){
-        axios.post(
+      axios.post(
           'http://127.0.0.1:5000/addToCart',
           card_detail
         ).then((res)=>{
-              console.log('added');
+              //console.log('added');
               if(res.data.code===200){
-                console.log("carted");
+               // console.log("carted");
                 var cid = localStorage.getItem('cartItems');
                 localStorage.setItem('cartItems',parseInt(cid)+1)
                 //toast.success("Item added",{position:toast.POSITION.TOP_CENTER,autoClose:5000})
                 window.location = '/'
               }else{
-                toast.error("Cannot add more than stock:"+res.data.error+"",{position:toast.POSITION.TOP_CENTER,autoClose:5000})
+                toast.error("Error: "+res.data.error+"",{position:toast.POSITION.TOP_CENTER,autoClose:5000})
                 console.log(res.data.error);
               }
 
         })
       }
-      
-      }
+
     const cardEdit = () =>{
           localStorage.setItem('cardItem', JSON.stringify(card_detail));
           window.location = '/add';
@@ -101,47 +107,9 @@ function Productitem({id,name,price,stock,shortdesc,Desc,file,category}) {
       setOpenModal(!openModal);
     };
     return (
-        // <div className="card_row">
-            
-        // <Card className="card" id={name}>
-        //   <CardActionArea>
-        //     <div className='overflow'>
-        //       <CardMedia
-        //         className={`cardImg ${classes.media}`}
-        //         image={filePath}
-        //         title="Contemplative Reptile"
-        //       />
-        //     </div>
-        //     <CardContent className="card_content">
-        //       <Typography gutterBottom variant="h5" component="h2">
-        //         {name}
-        //       </Typography>
-        //       <Typography gutterBottom variant="h5" component="h2">
-        //         {price}$    Available: {stock} 
-        //       </Typography>
-        //       <Typography paragraph>
-        //         {Desc} 
-        //       </Typography>
-                
-        //     </CardContent>
-        //   </CardActionArea>
-        //   <CardActions>
-        //   <Button size="small" color="primary" onClick={addTOC}>
-        //   Add to cart          
-        // </Button>  
-        //   {/* <IconButton aria-label="add to favorites" color={toggleHeart ? 'secondary' : 'default'} 
-        //     onClick={changeColor}>
-        //         <FavoriteIcon />
-        //     </IconButton> */}
-        //     {adminBtn}
-        //   </CardActions>
-        // </Card>
-        
-        // </div>
         <div>
-        {/* <Fade cascade> */}
         <div className="card_row">     
-        <Card className="card" id={name} >
+        <Card className={`card ${classes.root}`}>
           <CardActionArea onClick={()=>{setOpenModal(!openModal)}}>
             <div className='overflow'>
               <CardMedia
@@ -150,28 +118,34 @@ function Productitem({id,name,price,stock,shortdesc,Desc,file,category}) {
                 title="Contemplative Reptile"
               />
             </div>
-            <CardContent className="card_content">
-              <Typography gutterBottom variant="h5" component="h2">
+            <CardContent className={`card_content ${classes.content}`}>
+              <Typography gutterBottom variant="h5" component="h2" >
                 {name}
               </Typography>
-              <Typography gutterBottom variant="h5" component="h2">
-                {price}$    Available: {stock} 
+              <Typography gutterBottom variant="h6" component="h2">
+                Price: ${price}
               </Typography>
-              <Typography paragraph>
+              <Typography gutterBottom variant="inherit" component="h2" color="textSecondary" >
+                 Available: {stock} 
+              </Typography>
+              <Typography paragraph variant="inherit" component="h2" color="textSecondary" >
                 {Desc} 
               </Typography>
+              {stock<=0 &&(
+                <Typography paragraph variant="caption" component="h2" color="secondary" >
+                   *Item Not Available 
+                </Typography>
+              )}
                 
             </CardContent>
           </CardActionArea>
           <CardActions>
-          <Button size="small" color="primary" onClick={addTOC}>
-          Add to cart          
-        </Button>  
-          {/* <IconButton aria-label="add to favorites" color={toggleHeart ? 'secondary' : 'default'} 
-            onClick={changeColor}>
-                <FavoriteIcon />
-            </IconButton> */}
-            {adminBtn}
+
+                <Button size="small" color="primary" onClick={addTOC}>
+                Add to cart          
+              </Button>  
+
+          {adminBtn}
           </CardActions>
         </Card>
         </div>

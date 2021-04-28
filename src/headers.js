@@ -1,10 +1,10 @@
 import React,{Component} from 'react'
 import SearchIcon from '@material-ui/icons/Search'
 import './headers.css'
-import logo from './grocery_img.jpg'
+import logo from './freshmart-logo.png'
 import {Link} from 'react-router-dom'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
-
+// import axios from 'axios'
 import 'react-toastify/dist/ReactToastify.css'
 class Header extends Component{
     state = {
@@ -23,19 +23,23 @@ class Header extends Component{
         this.setState({ user: null });
         localStorage.removeItem("user");
         localStorage.removeItem("accesscode");
-        localStorage.removeItem("cartItems")
-        window.location = '/';
+        localStorage.removeItem("cartItems");
+        // axios.get('http://127.0.0.1:5000/logout')
+        // .then((res)=>{
+        //     if(res.data.code===200){
+        //         window.location = '/';   
+        //     }
+        // })
+        window.location = '/';   
       };
   
     
     render(){
         return(
-            <nav className="header">
+            <nav className="header" expand="lg">
                 <img className="header_logo" alt="logo" src={logo}/>
-                {/* <h1 className="header_title">Grocery</h1> */}
                 <div className="header_search">
                     <input type="text" value={this.props.searchInput} onChange = {this.props.changeInput} name = "search" className="header_searchInput"/>
-                    {/* <button className="header_searchIcon">sdf</button> */}
                     <SearchIcon className="header_searchIcon" onClick={this.props.handleClick}/>
                 </div>
                 

@@ -110,7 +110,7 @@ class Home extends Component{
                         
                     </div>
                     </div>
-
+                    {this.state.prod.length>0 &&
                     <ReactPaginate
                     previousLabel={"prev"}
                     nextLabel={"next"}
@@ -123,6 +123,7 @@ class Home extends Component{
                     containerClassName={"pagination"}
                     subContainerClassName={"pages pagination"}
                     activeClassName={"active"}/>
+                }
             </div>        
  
 

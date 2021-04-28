@@ -10,7 +10,15 @@ import Addproduct from './components/Addproduct'
 import Favorite from './components/Favorite'
 import history from './history';
 import History from './components/History'
+// import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
+// const theme = createMuiTheme({
+//   palette: {
+//     primary: 'purple',
+//     secondary: 'green',
+//     error: 'red',
+//   },
+// });
 class App extends Component {
 
   state = {
@@ -49,8 +57,8 @@ handleClick = () =>{
           <Route path="/">
             <Home searchInput={this.state.searchInput}/>
           </Route>
-
         </Switch>
+        {/* <Footer /> */}
         </div>
       </Router>
     

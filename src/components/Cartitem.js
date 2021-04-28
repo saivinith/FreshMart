@@ -76,12 +76,11 @@ function Cartitem({id,cardId,name,price,stock,shortdesc,Desc,file,category,quant
                 {name}
               </Typography>
               <Typography gutterBottom variant="h5" component="h2">
-                {price}$    quantity: {quantity} 
+                 price: ${price}   
               </Typography>
-              <Typography paragraph>
-                {Desc} 
+              <Typography gutterBottom variant="subtitle1" component="h2" color="textSecondary" >
+                 quantity: {quantity} 
               </Typography>
-                
             </CardContent>
           </CardActionArea>
           <CardActions>

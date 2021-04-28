@@ -38,3 +38,10 @@
     background-color: white;
     width: 98%;
 }
+.error{
+    color: red;
+    text-align: center;
+}
+.errorType{
+    border: 1px solid #eb516d;
+}
