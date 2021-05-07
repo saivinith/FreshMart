@@ -12,7 +12,7 @@
 }
 .grid {
   padding-top: 10px;
-  padding-left: 20px;
+  padding-left: 27%;
 }
 
 .grid-element {
@@ -58,12 +58,11 @@
   border-radius: unset;
 }
 
-.button_cart{
+.button_cart {
   background-color: #f0c14b;
 }
-.AddressBox{
+.AddressBox {
   border: 1px solid black;
   background: rgb(250, 250, 250);
   padding: 20px;
-  
 }

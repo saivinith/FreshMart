@@ -10,6 +10,7 @@ import Addproduct from './components/Addproduct'
 import Favorite from './components/Favorite'
 import history from './history';
 import History from './components/History'
+import ProductFilter from './components/ProductFilter'
 // import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
 // const theme = createMuiTheme({
@@ -23,11 +24,33 @@ class App extends Component {
 
   state = {
     searchInput:'',
+    filterCategory:[],
+    filterPrice:'',
     tempInput:''
 }
 changeInput = (e) =>{
   this.setState({tempInput:e.target.value})
+  console.log('In changeInput')
 }
+applyCategoryFilter = (e) =>{
+  var temp = [];
+  temp = this.state.filterCategory.map(function(item) {
+    return item;
+  })
+  //temp.push(this.state.filterCategory);
+  if(e.target.checked)
+  {temp.push(e.target.name)}
+  else
+  {
+    temp = temp.filter(function(item) {
+    return item !== e.target.name
+  })
+  }
+  this.setState({
+    filterCategory: temp});
+    console.log(this.state.filterCategory);
+}
+
 handleClick = () =>{
     this.setState({searchInput:this.state.tempInput})
     localStorage.setItem("searchInput",this.state.searchInput)
@@ -55,7 +78,8 @@ handleClick = () =>{
             <History/>
           </Route>
           <Route path="/">
-            <Home searchInput={this.state.searchInput}/>
+            <ProductFilter applyCategoryFilter={this.applyCategoryFilter.bind(this)}/>
+            <Home searchInput={this.state.searchInput} filterCategory = {this.state.filterCategory}/>
           </Route>
         </Switch>
         {/* <Footer /> */}

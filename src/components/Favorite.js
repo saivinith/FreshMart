@@ -13,8 +13,7 @@ import Button from '@material-ui/core/Button';
 import 'react-toastify/dist/ReactToastify.css'
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import {toast} from 'react-toastify'
-import { BorderColorOutlined } from '@material-ui/icons';
+import {toast} from 'react-toastify';
 class Favorite extends Component{
     state = {
         name: "",

@@ -83,6 +83,7 @@ class Createaccount extends Component{
         })
     }
     handlePasswordChange = e =>{
+        // eslint-disable-next-line
         var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
         if(strongRegex.test(e.target.value)){
             this.setState({color:'green',strongPwd:true})

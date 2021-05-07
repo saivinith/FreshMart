@@ -23,7 +23,8 @@ class Home extends Component{
             orgProd: [],
             perPage: 3,
             currentPage: 0,
-            pageCount: 0
+            pageCount: 0,
+            nonFiltProd: []
         }
         this.handlePageClick = this.handlePageClick.bind(this);
     }
@@ -55,6 +56,19 @@ class Home extends Component{
     componentDidMount() {
         this.getProducts();
     }
+    // static getDerivedStateFromProps() {
+    //     console.log('in componentDidUpdate');
+    //     var items = this.state.orgProd;
+        
+
+    //     const products = items;
+    //         var slice = products.slice(this.state.offset, this.state.offset + this.state.perPage)
+
+    //         this.setState({
+    //             pageCount: Math.ceil(products.length / this.state.perPage),
+    //             prod:slice
+    //         })
+    // }
     getProducts = () =>{
         axios.get('/fetchProducts')
         .then((res)=>{
@@ -75,17 +89,7 @@ class Home extends Component{
     
     displayProducts = (items) =>{
         if(!items.length) return null;
-        items = items.filter(
-            (val) =>{
-                if(this.props.searchInput === ""){
-                    return val;
-                }
-                else if(val.name.toLowerCase().includes(this.props.searchInput.toLowerCase())){
-                    return val;
-                }
-            }
-            
-        );
+        
         return items.map((key,index) => (
               
             <div  key={index} className="grid-element">
@@ -96,6 +100,55 @@ class Home extends Component{
             ))  
     };
 
+    componentWillReceiveProps() {
+
+        console.log(this.props.filterCategory);
+       axios.get('/fetchProducts')
+       .then((res)=>{
+           var products = res.data;
+           products = products.filter(
+            // eslint-disable-next-line
+            (val) =>{
+                if(this.props.searchInput === ""){
+                    return val;
+                }
+                else if(val.name.toLowerCase().includes(this.props.searchInput.toLowerCase())){
+                    return val;
+                }
+            }
+            
+            );
+            console.log(this.props.filterCategory.length);
+
+            // applying category filter
+            products = products.filter(
+                // eslint-disable-next-line
+                (val) =>{
+                    if(this.props.filterCategory.length == 0){
+                        return val;
+                    }
+                    else if(this.props.filterCategory.includes(val.category)){
+                        return val;
+                    }
+                }
+                
+                );
+
+           var slice = products.slice(this.state.offset, this.state.offset + this.state.perPage)
+
+           this.setState({
+               pageCount: Math.ceil(products.length / this.state.perPage),
+               orgProd : products,
+               prod:slice
+           })
+       })
+       .catch(()=>{
+           console.log('error home')
+       })
+
+       
+
+      }
     render(){
         //const { items } = this.state.items;
         return(
