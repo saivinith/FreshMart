@@ -5,14 +5,14 @@
   padding: 20px;
   width: 50%;
   top: 10%;
+  padding-bottom: 50px;
   left: 20%;
 }
 .align-items {
   width: 100%;
   margin-bottom: 20px !important;
 }
-.button_add{
+.button_add {
   background-color: #f0c14b;
-  color:#f0c14b;
+  color: #f0c14b;
 }
-

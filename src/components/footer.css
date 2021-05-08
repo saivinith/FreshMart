@@ -1,0 +1,24 @@
+.footer {
+  background-color: #0d1429;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+  height: 3rem;
+  color: white;
+}
+.footer a:link {
+  color: green;
+}
+
+/* visited link */
+.footer a:visited {
+  color: green;
+}
+
+/* selected link */
+.footer a:active {
+  color: blue;
+}

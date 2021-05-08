@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 // import Alert from 'react-bootstrap/Alert'
 import Login from './components/login'
 import Home from './components/home'
+import Footer from './components/footer'
 import Createaccount from './components/signup'
 import Addproduct from './components/Addproduct'
 import Favorite from './components/Favorite'
@@ -79,10 +80,12 @@ handleClick = () =>{
           </Route>
           <Route path="/">
             <ProductFilter applyCategoryFilter={this.applyCategoryFilter.bind(this)}/>
+            <div className="add-filter-space">
             <Home searchInput={this.state.searchInput} filterCategory = {this.state.filterCategory}/>
+            </div>
           </Route>
         </Switch>
-        {/* <Footer /> */}
+       <Footer />
         </div>
       </Router>
     

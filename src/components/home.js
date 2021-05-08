@@ -2,8 +2,6 @@ import axios from 'axios'
 import React, { Component } from 'react'
 import Productitem from './Productitem'
 import './home.css'
-import AliceCarousel from 'react-alice-carousel';
-import "react-alice-carousel/lib/alice-carousel.css";
 import Grid from '@material-ui/core/Grid';
 import ReactPaginate from 'react-paginate'
 

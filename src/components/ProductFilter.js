@@ -4,18 +4,22 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 class ProductFilter extends Component{
     state={
     }
     componentDidMount(){
     }
+
+ 
     
     render() {
         return (
-            <div className='centerBox'>
-                  <h2 className="title">Apply Filters</h2>
+          <Card className="root" variant="outlined">
+      <CardContent>
+      <h2 className="title">Apply Filters</h2>
               <br/>
               <FormControl component="fieldset" >
         <FormLabel component="legend">Select Categories</FormLabel>
@@ -42,8 +46,9 @@ class ProductFilter extends Component{
           />
         </FormGroup>
       </FormControl>
-            </div>
-          );
+      </CardContent>
+    </Card>
+            );
     }
 }
 export default ProductFilter;
