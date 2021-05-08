@@ -32,7 +32,7 @@ def signup():
         tbl_user.insert_one({"_id":row_count+1,"email":email,"username":username,"password":password.hexdigest(),"mobile":mobile})
     else:
         return jsonify({"error":"hope it works","code":500}) 
-    session['user'] = username
+    #session['user'] = username
     return jsonify({"success":"hope it works","code":200,"username":username})
 
 @app.route('/validate',methods=['POST'])
@@ -45,17 +45,16 @@ def validate():
         data = tbl_user.find({"email":email,"password":password})
         user_fav = tbl_fav.count({'deleted' : {'$ne' : 1 },'userID':{'$eq':str(data[0]['_id'])}})
         #print(user_fav)
-        session['user'] = data[0]['_id']
-        print(session['user'])
+        #session['user'] = data[0]['_id']
+        #print(session['user'])
         return json.dumps({"code":200,"username":data[0]['username'],"userId":data[0]['_id'],"cartItems":int(user_fav)})
     else:
         return jsonify({"code":401})
 
-# @app.route('/logout',methods=['GET'])
-# def logout():
-#         print("logout")
-#         session.pop("user", None)
-#         return jsonify({"code":500})
+@app.route('/user',methods=['GET'])
+def user():
+        user_Count = tbl_user.count();
+        return jsonify({"code":200,"id":user_Count})
 
 @app.route('/product',methods=['POST'])
 def product():  

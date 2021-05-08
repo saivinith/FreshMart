@@ -2,8 +2,8 @@ import axios from 'axios'
 import React, { Component } from 'react'
 import Productitem from './Productitem'
 import './home.css'
-//import {Container,Row,Col} from 'react-bootstrap'
-//import 'bootstrap/dist/css/bootstrap.min.css';
+import AliceCarousel from 'react-alice-carousel';
+import "react-alice-carousel/lib/alice-carousel.css";
 import Grid from '@material-ui/core/Grid';
 import ReactPaginate from 'react-paginate'
 
@@ -124,7 +124,7 @@ class Home extends Component{
             products = products.filter(
                 // eslint-disable-next-line
                 (val) =>{
-                    if(this.props.filterCategory.length == 0){
+                    if(this.props.filterCategory.length === 0){
                         return val;
                     }
                     else if(this.props.filterCategory.includes(val.category)){
@@ -155,6 +155,7 @@ class Home extends Component{
             <div>
                     <div className="content">
                     <div className="main">
+
                         <Grid container spacing ={3} className="grid">
                             {this.displayProducts(this.state.prod)}
                         </Grid>

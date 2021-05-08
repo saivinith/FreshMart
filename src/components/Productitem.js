@@ -18,7 +18,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import Modal from "react-modal";
 import Zoom from "react-reveal/Zoom";
 import { FlexboxGrid } from 'rsuite';
-
+import CurrencyFormat from 'react-currency-format'
 const useStyles = makeStyles({
   root: {
     maxWidth: 250,
@@ -55,7 +55,7 @@ function Productitem({id,name,price,stock,shortdesc,Desc,file,category}) {
 
     const addTOC = () =>{
       if(!user)
-      window.location='/login'
+      {window.location='/login'}
       card_detail.userID = localStorage.getItem('userId');
       console.log(stock);
       axios.post(
@@ -115,6 +115,7 @@ function Productitem({id,name,price,stock,shortdesc,Desc,file,category}) {
               <CardMedia
                 className={`cardImg ${classes.media}`}
                 image={filePath}
+                height='180px'
                 title="Contemplative Reptile"
               />
             </div>
@@ -125,14 +126,14 @@ function Productitem({id,name,price,stock,shortdesc,Desc,file,category}) {
               <Typography gutterBottom variant="h6" component="h2">
                 Price: ${price}
               </Typography>
-              <Typography gutterBottom variant="inherit" component="h2" color="textSecondary" >
+              <Typography gutterBottom variant="inherit" component="h3"  >
                  Available: {stock} 
               </Typography>
-              <Typography paragraph variant="inherit" component="h2" color="textSecondary" >
+              <Typography paragraph variant="inherit" component="h3" >
                 {Desc} 
               </Typography>
               {stock<=0 &&(
-                <Typography paragraph variant="caption" component="h2" color="secondary" >
+                <Typography paragraph variant="caption" component="h4" color="secondary" >
                    *Item Not Available 
                 </Typography>
               )}
@@ -168,13 +169,12 @@ function Productitem({id,name,price,stock,shortdesc,Desc,file,category}) {
 
                     </p>
                     <div className="product-price">
-                      <div>{price}</div>
+                      <div><CurrencyFormat value={price} displayType={'text'} thousandSeparator={true} prefix={'$'} /></div>
                       <button
                         className="button primary"
-                        onClick={() => {
-                          this.props.addToCart(card_detail);
-                          this.closeModal();
-                        }}
+                        onClick={
+                          addTOC
+                        }
                       >
                         Add To Cart
                       </button>

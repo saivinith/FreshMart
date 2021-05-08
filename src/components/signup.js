@@ -59,9 +59,24 @@ class Createaccount extends Component{
                 mobile:this.state.mobile   
             }).then((res)=>{
                 console.log(res.data);
-                window.location = '/';
+                
                 if(res.data.code===200){
                     localStorage.setItem("user", JSON.stringify(res.data.username));
+                    axios.get('http://127.0.0.1:5000/user').then((res)=>{
+
+                        if(res.data.code===200){
+                            localStorage.setItem("userId", JSON.stringify(res.data.id));
+                        }
+
+                    })
+                    localStorage.setItem("accesscode", 0);
+                    localStorage.setItem("cartItems", 0);
+                    window.location = '/';
+                }
+                else{
+                    if(res.data.code===401){
+                        this.setState({error:true,errorValue:'*User Already Exists!'})
+                    }
                 }
             })
         }

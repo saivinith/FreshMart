@@ -102,7 +102,7 @@ class Addproduct extends Component{
  
     render() {
         return (
-            <div className='centerBox'>
+            <div className='centerBox1'>
                   <h2 className="title">Add Product</h2>
               <br/>
               <form onSubmit={this.save}>
@@ -196,6 +196,10 @@ class Addproduct extends Component{
                         size="large"
                         className={`align-items button_add`}
                         startIcon={<SaveIcon />}
+                        style={{
+                          backgroundColor: "#e9b533",
+                          
+                      }}
                         onClick={this.save}
                       >
                         ADD Product

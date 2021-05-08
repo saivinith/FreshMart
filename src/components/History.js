@@ -35,7 +35,7 @@ export default class Purchases extends Component{
         if(!items.length) return null;
         console.log(items)
         return items.map((value,index) => (
-            <Grid container direction="row" >
+            <Grid container direction="row" key={index}>
             <p>{value[0]}</p>          
             {
             value[1].map((key,index) => (
