@@ -94,7 +94,12 @@ class Favorite extends Component{
             console.log('error home')
         })
     }
-    closeModal 
+    closeModal =()=>{
+        this.setState({receipt:false})
+        localStorage.setItem('cartItems',0)
+        window.location = '/cart';
+        
+    }
     
     displayProducts = (items) =>{
         if(!items.length) return null;
@@ -242,17 +247,11 @@ class Favorite extends Component{
                                                         </div>
                                                     )}  
                             {this.state.receipt && (
-                                <Modal isOpen={true}  onRequestClose={()=>{
-                                    this.setState({receipt:false})
-                                    localStorage.setItem('cartItems',0)
-                                    window.location.reload(false);
-                                }}>
+                                <Modal isOpen={true}  onRequestClose={this.closeModal}>
                                     <Zoom>
-                                    <button className="close-modal" onClick={()=>{
-                                    this.setState({receipt:false})
-                                    localStorage.setItem('cartItems',0)
-                                    window.location.reload(false);
-                                }}>
+                                    <button className="close-modal" onClick={
+                                        this.closeModal
+                                }>
                                         x
                                     </button>
                                     <div className="order-details">
